@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,27 +10,51 @@ namespace Zadatak_3
 {
     public class GenericListEnumerator<X> : IEnumerator<X>
     {
+        private GenericList<X> _internalEnumenatorList;
+        private int listCurrentIndex;
+        private X listValue;
+
         public GenericListEnumerator(GenericList<X> list)
         {
-            list.GetEnumerator();
+            _internalEnumenatorList = list;
+            listCurrentIndex = -1;
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            // Dispose of unmanaged resources.
+            //Dispose(true);
+            // Suppress finalization.
+            //GC.SuppressFinalize(this);
+            //Preuzeto sa:
+            //https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose
+            
         }
 
         public bool MoveNext()
         {
-            throw new NotImplementedException();
+            listCurrentIndex++;
+            if (listCurrentIndex >= _internalEnumenatorList.Count)
+            {
+                return false;
+            }
+            else
+            {
+                listValue = _internalEnumenatorList.GetElement(listCurrentIndex);
+                return true;
+            }
+
         }
 
         public void Reset()
         {
-            throw new NotImplementedException();
+            listCurrentIndex = -1;
         }
 
-        public X Current { get; }
+        public X Current
+        {
+            get { return listValue;  }
+        }
 
         object IEnumerator.Current
         {
