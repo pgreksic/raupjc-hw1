@@ -28,6 +28,8 @@ namespace Zadatak_3
             //GC.SuppressFinalize(this);
             //Preuzeto sa:
             //https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose
+            //Test zadatka tri nije prolazio sve dok nisam maknu defaultnu implementaciju:
+            //throw new NotImplementedException(); 
             
         }
 
